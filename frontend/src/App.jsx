@@ -1,17 +1,21 @@
-import Swal from 'sweetalert2'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function App() {
-Swal.fire({
-  title: 'Error!',
-  text: 'Do you want to continue',
-  icon: 'error',
-  confirmButtonText: 'Cool'
-})
+import CreateEmployeePage from "./pages/EmployeeCreate";
+import EditEmployeePage from "./pages/EmployeeEdit";
+import EmployeeLayout from "./components/Layout";
+import EmployeesPage from "./pages/Employees";
+
+export default function App() {
   return (
-   <h1 class="text-3xl bg-blue-300 font-bold underline">
-    Hello world!
-  </h1>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<EmployeeLayout />}>
+          <Route index element={<EmployeesPage />} />
+          <Route path="/create" element={<CreateEmployeePage />} />
+          <Route path="/edit/:id" element={<EditEmployeePage />} />
+          <Route path="*" element={<h1>Not Found!</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App
